@@ -1,0 +1,26 @@
+// Proto files are how we define our service (the functions the client call) and the messages (the data types that are either received or returned by services).
+// The beauty is the proto files are language agnostic so someone can take the same proto file and then implement it using Go, Rust, Python, Java and so forth...
+// ...without having to make any changes to the proto file.
+
+syntax = "proto3";
+ 
+// below `message` is similar to what we call to `type` of data or variable inside our aplication or simply it's an object
+message Empty {}
+
+message Dog {
+    // below we are prioritizing the important fields by giving them ranks or number
+    string name = 1;
+    int32 age = 2;
+}
+
+// `service` are similar to routes in `REST Api` with different `URLs` or `end-points`
+// Each `service` should be a separate bundle of things that we can do that are `related` 
+// We can create as many service as we want but the idea is that they should generally have a theme.
+// Below `DogService` is like one sort of `endpoint` or one `function` and this is going to have one `action` or `function` or `procedure` called `GetDog` 
+// i.e it is called `remote procedure call` so we're basically invoking a function remotely...
+// In `GraphQL Api` we invoking different functions using one end-point
+// In `REST Api` we invoke different functions using more than one end-points
+
+service DogService {
+    rpc GetDog (Empty) returns (Dog) {}
+}
